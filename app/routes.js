@@ -11,7 +11,7 @@ module.exports = function(app, passport) {
 	});
 
 	
-	app.get('/tweet', isLoggedIn, function(req, res) { 
+	app.get('/uploadtweet', isLoggedIn, function(req, res) { 
         res.sendfile(path.resolve('views/twitter.html'), {
             user : req.user    
 		});
@@ -65,7 +65,7 @@ module.exports = function(app, passport) {
 		// handle the callback after twitter has authenticated the user
 		app.get('/auth/twitter/callback',
 			passport.authenticate('twitter', {
-				successRedirect : '/tweet',
+				successRedirect : '/uploadtweet',
 				failureRedirect : '/'
 			}));
 
