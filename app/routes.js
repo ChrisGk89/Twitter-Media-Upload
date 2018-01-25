@@ -18,6 +18,18 @@ module.exports = function(app, passport) {
 	});
 
 
+	app.get('/login', isLoggedIn, function(req, res) { 
+        res.sendfile(path.resolve('views/twitter.html'), {
+            user : req.user    
+		});
+	});
+
+	app.get('/signup', isLoggedIn, function(req, res) { 
+        res.sendfile(path.resolve('views/twitter.html'), {
+            user : req.user    
+		});
+	});
+
 	// LOGOUT ==============================
 	app.get('/logout', function(req, res) {
 		req.logout();
