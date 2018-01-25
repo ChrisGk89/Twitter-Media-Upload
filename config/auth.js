@@ -6,7 +6,7 @@ module.exports = {
 	'twitterAuth' : {
 		'consumerKey' 		: 'LLPwgnBjYUvpGusXyyQb5QMAh',
 		'consumerSecret' 	: 'oCg6nwCy2HN3k1RgbP71xxLa8UQOEclKCFCrdnSbXLhO7KrnwG',
-		'callbackURL' 		: 'https://still-temple-23851.herokuapp.com/auth/twitter/callback'
+		'callbackURL' 		: 'https://first-assignment89.herokuapp.com/auth/twitter/callback'
 	}
 
 };
