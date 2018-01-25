@@ -12,7 +12,7 @@ module.exports = function(app, passport) {
 
 	
 	app.get('/uploadtweet', isLoggedIn, function(req, res) { 
-        res.sendfile(path.resolve('views/twitter2.html'), {
+        res.sendfile(path.resolve('views/twitter.html'), {
             user : req.user    
 		});
 	});
