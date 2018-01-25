@@ -1,7 +1,7 @@
-
 var path = require('path');
 
 module.exports = function(app, passport) {
+
 
 // normal routes ===============================================================
 
@@ -11,25 +11,11 @@ module.exports = function(app, passport) {
 	});
 
 	
-	app.get('/index2', isLoggedIn, function(req, res) { 
-        res.sendfile(path.resolve('views/patient.html'), {
-            user : req.user,        
+	app.get('/tweet', isLoggedIn, function(req, res) { 
+        res.sendfile(path.resolve('views/twitter.html'), {
+            user : req.user    
 		});
 	});
-
-
-
-	/*app.get('/researcher', isLoggedIn, function(req, res) { 
-        res.sendfile(path.resolve('views/researcher.html'), {
-            user : req.user       
-		});
-	});
-
-	app.get('/doctor', isLoggedIn, function(req, res) { 
-        res.sendfile(path.resolve('views/doctor.html'), {
-            user : req.user        
-		});
-	});*/
 
 
 	// LOGOUT ==============================
@@ -42,6 +28,45 @@ module.exports = function(app, passport) {
 // AUTHENTICATE (FIRST LOGIN) ==================================================
 // =============================================================================
 
+	// locally --------------------------------
+		// LOGIN ===============================
+		// show the login form
+		app.get('/login', function(req, res) {
+			res.render('login.ejs', { message: req.flash('loginMessage') });
+		});
+
+		// process the login form
+		app.post('/login', passport.authenticate('local-login', {
+			successRedirect : '/profile', // redirect to the secure profile section
+			failureRedirect : '/login', // redirect back to the signup page if there is an error
+			failureFlash : true // allow flash messages
+		}));
+
+		// SIGNUP =================================
+		// show the signup form
+		app.get('/signup', function(req, res) {
+			res.render('signup.ejs', { message: req.flash('loginMessage') });
+		});
+
+		// process the signup form
+		app.post('/signup', passport.authenticate('local-signup', {
+			successRedirect : '/profile', // redirect to the secure profile section
+			failureRedirect : '/signup', // redirect back to the signup page if there is an error
+			failureFlash : true // allow flash messages
+		}));
+
+	// facebook -------------------------------
+
+		// send to facebook to do the authentication
+		app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+		// handle the callback after facebook has authenticated the user
+		app.get('/auth/facebook/callback',
+			passport.authenticate('facebook', {
+				successRedirect : '/doctor',
+				failureRedirect : '/'
+			}));
+
 	// twitter --------------------------------
 
 		// send to twitter to do the authentication
@@ -50,15 +75,28 @@ module.exports = function(app, passport) {
 		// handle the callback after twitter has authenticated the user
 		app.get('/auth/twitter/callback',
 			passport.authenticate('twitter', {
-				successRedirect : '/pages/index2',
+				successRedirect : '/tweet',
 				failureRedirect : '/'
 			}));
+
+
+	// google ---------------------------------
+
+		// send to google to do the authentication
+		app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+		// the callback after google has authenticated the user
+		app.get('/auth/google/callback',
+			passport.authenticate('google', {
+				successRedirect : '/researcher',
+				failureRedirect : '/'
+			}));
+
 
 };
 
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
-	
 	if (req.isAuthenticated())
 		return next();
 
