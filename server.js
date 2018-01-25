@@ -48,5 +48,4 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 // launch ======================================================================
 
 app.listen(port);
-console.log('Ding Dong ' + port);
-//console.log(userData.User.userID[3].Lat, userData.User.userID[3].Long);  
+console.log('App is running on: ' + port);
