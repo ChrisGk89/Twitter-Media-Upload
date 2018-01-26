@@ -10,7 +10,7 @@ var client = new Twitter({
   consumer_key: ' LLPwgnBjYUvpGusXyyQb5QMAh',
   consumer_secret: 'oCg6nwCy2HN3k1RgbP71xxLa8UQOEclKCFCrdnSbXLhO7KrnwG',
   access_token_key: '162027406-utH1pSRECdzsFzFaaPI1ekeHmwKPGEvbcw3Tqqo6',
-  access_token_secret: ' IfDKKJyziu87ZhQWFoBW9l3ttoqWvDIT9t75Sn4qvmrOq'
+  access_token_secret: 'IfDKKJyziu87ZhQWFoBW9l3ttoqWvDIT9t75Sn4qvmrOq'
 });
 
 var params = {screen_name: 'nodejs'};
