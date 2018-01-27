@@ -1,7 +1,5 @@
 var path = require('path');
 var Twitter = require('twitter');
-const multer = require('multer');
-var express = require('express');
 
 
 
