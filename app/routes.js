@@ -69,6 +69,51 @@ module.exports = function(app, passport) {
 			}));
 
 
+		var data;
+				app.post('/upload', function (req, res) {
+				  upload(req, res, function (err){
+				    if(err){
+				      res.render('index.ejs', {
+				        message: req.flash(err)
+				      });
+				    } else {
+						      if(req.file == undefined){
+						        res.render('index.ejs', {
+						          message: req.flash('Error: No File Selected!')
+						        });
+						      } else {
+									      	data = require('fs').readFileSync(req.file.path);
+									      	client.post('media/upload', {media: data}, function(error, media, response) {
+
+									  if (!error) {
+											    // If successful, a media object will be returned.
+											    console.log(media);
+											    // Lets tweet it
+											    var status = {
+											      status: 'I am a tweet',
+											      media_ids: media.media_id_string // Pass the media id string
+											    }
+											    client.post('statuses/update', status, function(error, tweet, response) {
+											      if (!error) {
+											        console.log(tweet);
+											      }
+											    });
+
+									  }
+									});
+									        res.render('index', {
+									          msg: 'File Uploaded!',
+									          file: `uploads/${req.file.filename}`
+									        });
+						        
+						      		}
+				   		 }
+				  });
+				});
+
+
+
+
 };
 
 // route middleware to ensure user is logged in
@@ -78,3 +123,7 @@ function isLoggedIn(req, res, next) {
 
 	res.redirect('/');
 }
+
+
+
+
