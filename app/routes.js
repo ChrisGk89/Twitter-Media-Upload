@@ -1,7 +1,4 @@
 var path = require('path');
-var Twitter = require('twitter');
-
-
 
 module.exports = function(app, passport) {
 
