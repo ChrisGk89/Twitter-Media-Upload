@@ -1,6 +1,4 @@
-<script type="text/javascript">
-
-                $('#connect').click(function() {
+            $('#connect').click(function() {
                 var xhr = new XMLHttpRequest();
                 var myurl = $("#imageurl").val();
                 //document.getElementById("imageurl").value;
@@ -47,5 +45,3 @@
                 };
                 xhr.send();
                 });
-
-                </script>
