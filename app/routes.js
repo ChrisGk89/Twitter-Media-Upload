@@ -12,7 +12,7 @@ module.exports = function(app, passport) {
 
 	
 	app.get('/uploadtweet', isLoggedIn, function(req, res) { 
-        res.sendfile(path.resolve('views/twitter2.html'), {
+        res.sendfile(path.resolve('views/twitter.html'), {
             user : req.user    
 		});
 	});
@@ -69,7 +69,42 @@ module.exports = function(app, passport) {
 			}));
 
 
-		var data;
+
+
+		const storage = multer.diskStorage({
+				  destination: './public/uploads/',
+				  filename: function(req, file, cb){
+				    cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+				  }
+				});
+
+				// Init Upload
+				const upload = multer({
+				  storage: storage,
+				  limits:{fileSize: 1000000},
+				  fileFilter: function(req, file, cb){
+				    checkFileType(file, cb);
+				  }
+				}).single('myImage');
+
+				// Check File Type
+				function checkFileType(file, cb){
+				  // Allowed ext
+				  const filetypes = /jpeg|jpg|png|gif|mp4/;
+				  // Check ext
+				  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+				  // Check mime
+				  const mimetype = filetypes.test(file.mimetype);
+
+				  if(mimetype && extname){
+				    return cb(null,true);
+				  } else {
+				    cb('Error: Images and Videos Only!');
+				  }
+				}
+
+
+				var data;
 				app.post('/upload', function (req, res) {
 				  upload(req, res, function (err){
 				    if(err){
