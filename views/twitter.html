@@ -17,18 +17,27 @@
       word-wrap:break-word; 
       background-color: #678b98;
     }
-    .container{
-      padding-top: 30px;
-      border: #99D6D6;
-      border-radius: 10px;
+    .twitter{
+      width: 250px;
+
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+
+      background: #fff;
+      border: 1px solid #ccc;
+      outline: none;
+      padding: 10px;
+    }
+    .twitter:focus{
+        border:1px solid #56b4ef;
+        box-shadow: 0px 0px 3px 1px #c8def0;
     }
 
     h1{
       color: white;
     }
-    button{
-       color: #009999;
-    }
+    
   </style>
 </head>
 
@@ -46,7 +55,7 @@
         Tweet here (Max 140 words): <input type="text" id="status" >
         </div> -->
         <div class="container">
-        <input type="url" placeholder="Copy Adress Here: (Max size: 15MB):" id="imageurl" >
+        <input class="twitter" type="url" placeholder="Copy Adress Here: (Max size: 15MB):" id="imageurl" >
         </div>
 
         <!--<div class="container">
@@ -59,7 +68,7 @@
         </div>-->
 
         <div class="container">
-        <button class="btn btn-lg" id="connect">Tweet</button>
+        <button class="btn btn-info btn-lg" id="connect">Tweet</button>
         </div>
         <pre style="display:none" id="result"></pre><br>
         <img id="photo"/>
