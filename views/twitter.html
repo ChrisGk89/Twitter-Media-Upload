@@ -78,7 +78,7 @@
         </div>-->
 
         <div class="container2">
-        <button class="btn btn-info btn-lg" id="connect">Tweet</button>
+        <button class="btn btn-info btn-lg" id="connect" disabled="disabled">Tweet</button>
         </div>
         <pre style="display:none" id="result"></pre><br>
         <img id="photo"/>
@@ -130,6 +130,19 @@
 
                 };
                 xhr.send();
+                });
+
+
+
+                $(document).ready(function () {
+                    $('.twitter').on('input change', function () {
+                        if ($(this).val() != '') {
+                            $('.btn').prop('disabled', false);
+                        }
+                        else {
+                            $('.btn').prop('disabled', true);
+                        }
+                    });
                 });
 
                 </script>
