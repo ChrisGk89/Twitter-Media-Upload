@@ -63,56 +63,27 @@
         <!--<div class="container">
         Tweet here (Max 140 words): <input type="text" id="status" >
         </div> -->
-        <form id="regexpForm" class="form-horizontal">
-            <div class="form-group">
-            <div class="container-fluid">
+        <div class="container-fluid">
 
-            <input class="twitter" type="url" placeholder="Add Media URL:(Max size: 5MB)" id="imageurl" >
-            </div>
+        <input class="twitter" type="url" placeholder="Add Media URL:(Max size: 5MB)" id="imageurl" >
+        </div>
 
-            <!--<div class="container">
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-            <div class="file-field input-field">
-              <input type="file" name="Choose Image">
-            </div>  
-           
-            </form>
-            </div>-->
-
-            <div class="container2">
-            <button class="btn btn-info btn-lg" id="connect" disabled="disabled">Tweet</button>
-            </div>
-            </div>
+        <!--<div class="container">
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+        <div class="file-field input-field">
+          <input type="file" name="Choose Image">
+        </div>  
+       
         </form>
+        </div>-->
 
-        <pre style="display:none" id="result"></pre><br>
+        <div class="container2">
+        <button class="btn btn-info btn-lg" id="connect" disabled="disabled">Tweet</button>
+        </div>
+        <!-- <pre style="display:none" id="result"></pre><br>-->
         <img id="photo"/>
 
               <script type="text/javascript">
-
-               $(document).ready(function() {
-                $('#regexpForm').formValidation({
-                framework: 'bootstrap',
-                icon: {
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh'
-                        },
-                        fields: {
-                            avatar: {
-                                validators: {
-                                    regexp: {
-                                        regexp: /\.(gif|jpg|jpeg|tiff|png)$/i,
-                                        message: 'The URL must end with .jpg, .jpeg or .png'
-                                    },
-                                    uri: {
-                                        message: 'The URL is not valid'
-                                    }
-                                }
-                            }
-                        }
-                    });
-                });
 
                 $('#connect').click(function() {
                 var xhr = new XMLHttpRequest();
