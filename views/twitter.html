@@ -123,7 +123,7 @@
                 // Ask for the result as an ArrayBuffer.
                 xhr.responseType = "arraybuffer";
 
-                xhr.onload = function( e ) {
+                xhr.onload = function( upload ) {
                     // Obtain a blob: URL for the image data.
                     var arrayBufferView = new Uint8Array( this.response );
                     var blob = new Blob( [ arrayBufferView ], { type: "image/jpeg" } );
@@ -149,7 +149,7 @@
                     }).done(function(data){
                         var str = JSON.stringify(data, null, 2);
                         $('#result1').html("Picture Successfully Tweeted!\n").show()
-                    }).fail(function(e){
+                    }).fail(function(upload){
                         var errorTxt = JSON.stringify(e, null, 2)
                         $('#result2').html("Error! Try again to upload!\n").show()
                       console.log(error);
