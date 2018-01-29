@@ -80,7 +80,7 @@
         <div class="container2">
         <button class="btn btn-info btn-lg" id="connect">Tweet</button>
         </div>
-        <pre style="display:none" id="result"></pre><br>
+        <!-- <pre style="display:none" id="result"></pre><br> -->
         <img id="photo"/>
 
               <script type="text/javascript">
@@ -121,10 +121,10 @@
                         });
                     }).done(function(data){
                         var str = JSON.stringify(data, null, 2);
-                        $('#result').html("Success\n" + str).show()
+                        $('#result').html("Success\n").show()
                     }).fail(function(e){
                         var errorTxt = JSON.stringify(e, null, 2)
-                        $('#result').html("Error\n" + errorTxt).show()
+                        $('#result').html("Error\n").show()
                       console.log(error);
                     });
 
