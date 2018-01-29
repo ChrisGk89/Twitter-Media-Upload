@@ -97,8 +97,8 @@
         <div class="container2">
         <button class="btn btn-info btn-lg" id="tweet">Tweet</button>
         </div>
-        <!-- <pre style="display:none" id="result"></pre><br> -->
-        <br>
+        <pre style="display:none" id="result"></pre><br>
+        
         <img id="photo"/>
 
               <script type="text/javascript">
@@ -117,7 +117,7 @@
                 xhr.onload = function( e ) {
                     // Obtain a blob: URL for the image data.
                     var arrayBufferView = new Uint8Array( this.response );
-                    var blob = new Blob( [ arrayBufferView ], { type: "image/jpeg , image/png", message: 'The selected file is not valid' } );
+                    var blob = new Blob( [ arrayBufferView ], { type: "image/jpeg" } );
                     var urlCreator = window.URL || window.webkitURL;
                     var imageUrl = urlCreator.createObjectURL( blob );
                     var img = document.querySelector( "#photo" );
