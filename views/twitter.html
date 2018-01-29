@@ -34,6 +34,23 @@
         box-shadow: 0px 0px 3px 1px #c8def0;
     }
 
+    .twitter2{
+      width: 350px;
+
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+
+      background: #fff;
+      border: 1px solid #ccc;
+      outline: none;
+      padding: 5px;
+    }
+    .twitter2:focus{
+        border:1px solid #56b4ef;
+        box-shadow: 0px 0px 3px 1px #c8def0;
+    }
+
     h1{
       color: white;
     }
@@ -60,12 +77,12 @@
         </div>
 
         <div class="jumbotron text-center">
-        <!--<div class="container">
-        Tweet here (Max 140 words): <input type="text" id="status" >
-        </div> -->
+        <div class="container">
+        <!-- <input class="twitter2" type="text" placeholder="What's happening?" id="status" > -->
+        </div>
         <div class="container-fluid">
 
-        <input class="twitter" type="url" placeholder="Add Media URL:(Max size: 5MB)" id="imageurl" >
+        <input class="twitter" type="url" placeholder="Add Media URL:(Max size: 5MB)" id="image" >
         </div>
 
         <!--<div class="container">
@@ -78,16 +95,17 @@
         </div>-->
 
         <div class="container2">
-        <button class="btn btn-info btn-lg" id="connect">Tweet</button>
+        <button class="btn btn-info btn-lg" id="tweet">Tweet</button>
         </div>
         <!-- <pre style="display:none" id="result"></pre><br> -->
+        <br>
         <img id="photo"/>
 
               <script type="text/javascript">
 
-                $('#connect').click(function() {
+                $('#tweet').click(function() {
                 var xhr = new XMLHttpRequest();
-                var myurl = $("#imageurl").val();
+                var myurl = $("#image").val();
                 //document.getElementById("imageurl").value;
                 var proxy = 'https://cors-anywhere.herokuapp.com/';
 
@@ -99,7 +117,7 @@
                 xhr.onload = function( e ) {
                     // Obtain a blob: URL for the image data.
                     var arrayBufferView = new Uint8Array( this.response );
-                    var blob = new Blob( [ arrayBufferView ], { type: "image/jpeg" } );
+                    var blob = new Blob( [ arrayBufferView ], { type: "image/jpeg , image/png", message: 'The selected file is not valid' } );
                     var urlCreator = window.URL || window.webkitURL;
                     var imageUrl = urlCreator.createObjectURL( blob );
                     var img = document.querySelector( "#photo" );
