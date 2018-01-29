@@ -144,7 +144,7 @@
                         });
                     }).done(function(data){
                         var str = JSON.stringify(data, null, 2);
-                        $('#result').html("Success\n").show()
+                        $('#result').html("Picture Successfully Tweeted\n").show()
                     }).fail(function(e){
                         var errorTxt = JSON.stringify(e, null, 2)
                         $('#result').html("Error\n").show()
