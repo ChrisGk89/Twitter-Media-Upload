@@ -60,7 +60,7 @@
     .container2{
         padding-top: 15px;
     }
-    
+
     
   </style>
 </head>
@@ -99,7 +99,8 @@
         </div>
         <br>
         <div class="container-fluid">
-        <pre style="display:none" id="result"></pre><br>
+        <div class="alert alert-success" style="display:none" id="result1 "></p><br>
+        <div class="alert alert-danger" style="display:none" id="result2"></p><br>
         </div>
         
         <div class="container-fluid">
@@ -144,10 +145,10 @@
                         });
                     }).done(function(data){
                         var str = JSON.stringify(data, null, 2);
-                        $('#result').html("Picture Successfully Tweeted\n").show()
+                        $('#result1').html("Picture Successfully Tweeted!\n").show()
                     }).fail(function(e){
                         var errorTxt = JSON.stringify(e, null, 2)
-                        $('#result').html("Error\n").show()
+                        $('#result2').html("Error! Try again to upload!\n").show()
                       console.log(error);
                     });
 
