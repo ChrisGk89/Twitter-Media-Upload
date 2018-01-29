@@ -89,12 +89,12 @@
         </div>
 
         <div class="container">
-        <form action="/upload" method="POST" enctype="multipart/form-data">
+        <!--<form action="/upload" method="POST" enctype="multipart/form-data">
         <div class="file-field input-field">
           <input type="file" name="Choose Image">
         </div>  
        
-        </form>
+        </form>-->
         </div>
 
         <div class="container2">
@@ -103,13 +103,9 @@
         <br>
         <div class="container-fluid">
 
-        <div class="alert alert-success" alert-dismissable>
-        <p id="result1"></p><br>
-        </div>
+        <p class="alert alert-success" id="result1" alert-dismissable></p><br>
 
-        <div class="alert alert-danger" alert-dismissable>
-         <p id="result2" ></p><br>
-        </div>
+         <p class="alert alert-danger" id="result2" alert-dismissable></p><br>
         </div>
         
         <div class="container-fluid">
@@ -129,12 +125,14 @@
                 //$("#imageurl").val()
                 // Ask for the result as an ArrayBuffer.
                 //xhr.responseType = "arraybuffer";
+                $('#tweet').click(function){
 
+                var proxy = 'https://cors-anywhere.herokuapp.com/'
                 var bufferLength, filePath, finished, fs, oauthCredentials, offset, request, segment_index, theBuffer;
 
                   request = require('request');
                   fs = require('fs');
-                  filePath = '/thevideo.mp4';
+                  filePath = 'http://techslides.com/demos/sample-videos/small.mp4';
                   bufferLength = 1000000;
                   theBuffer = new Buffer(bufferLength);
                   offset = 0;
@@ -214,7 +212,7 @@
                           });
                       });
                   });
-                
+                };
 
 
 
