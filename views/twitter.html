@@ -18,7 +18,7 @@
       background-color: #678b98;
     }
     .twitter{
-      width: 350px;
+      width: 400px;
 
       border-radius: 5px;
       -webkit-border-radius: 5px;
@@ -104,7 +104,9 @@
         
         </div>
         
-        
+        <div class="container-fluid">
+        <img id="photo"/>
+        </div>
 
               <script type="text/javascript">
 
@@ -120,6 +122,7 @@
                 xhr.responseType = "arraybuffer";
 
                 xhr.onload = function( upload ) {
+                    // Obtain a blob: URL for the image data.
                     var arrayBufferView = new Uint8Array( this.response );
                     var blob = new Blob( [ arrayBufferView ], { type: "image/jpeg" } );
                     var urlCreator = window.URL || window.webkitURL;
@@ -145,7 +148,7 @@
                         var str = JSON.stringify(data, null, 2);
                         $('#result1').html("Picture Successfully Tweeted!\n").show()
                     }).fail(function(upload){
-                        var errorTxt = JSON.stringify(upload, null, 2)
+                        var errorTxt = JSON.stringify(e, null, 2)
                         $('#result2').html("Error! Try again to upload!\n").show()
                       console.log(error);
                     });
