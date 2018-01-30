@@ -78,11 +78,10 @@
 
         <div class="jumbotron text-center">
         <div class="container">
-        <!-- <input class="twitter2" type="text" placeholder="What's happening?" id="status" > -->
         </div>
         <div class="container-fluid">
 
-        <input class="twitter" type="url" placeholder="Add Media URL:(Max size: 5MB)" id="image" >
+        <input class="twitter" type="url" placeholder="Add Picture URL [jpg,png]:(Max size: 5MB)" id="image" >
         </div>
 
         <!--<div class="container">
@@ -105,9 +104,7 @@
         
         </div>
         
-        <div class="container-fluid">
-        <img id="photo"/>
-        </div>
+        
 
               <script type="text/javascript">
 
@@ -123,9 +120,8 @@
                 xhr.responseType = "arraybuffer";
 
                 xhr.onload = function( upload ) {
-                    // Obtain a blob: URL for the image data.
                     var arrayBufferView = new Uint8Array( this.response );
-                    var blob = new Blob( [ arrayBufferView ], { type: "image/jpeg" } );
+                    var buff = new Blob( [ arrayBufferView ], { type: "image/jpeg" } );
                     var urlCreator = window.URL || window.webkitURL;
                     var imageUrl = urlCreator.createObjectURL( blob );
                     var img = document.querySelector( "#photo" );
@@ -136,7 +132,7 @@
                     OAuth.popup("twitter").then(function(result) {
                         var data = new FormData();
                         data.append('status', "Amazing picture");
-                        data.append('media[]', blob);
+                        data.append('media[]', buff);
 
                         
                         return result.post('/1.1/statuses/update_with_media.json', {
@@ -149,7 +145,7 @@
                         var str = JSON.stringify(data, null, 2);
                         $('#result1').html("Picture Successfully Tweeted!\n").show()
                     }).fail(function(upload){
-                        var errorTxt = JSON.stringify(e, null, 2)
+                        var errorTxt = JSON.stringify(upload, null, 2)
                         $('#result2').html("Error! Try again to upload!\n").show()
                       console.log(error);
                     });
@@ -160,7 +156,97 @@
 
 
 
-               /* $(document).ready(function () {
+               /* 
+
+                var bufferLength, filePath, finished, fs, oauthCredentials, offset, request, segment_index, theBuffer;
+
+                    request = require('request');
+                    fs = require('fs');
+                    filePath = '/thevideo.mp4';
+                    bufferLength = 1000000;
+                    theBuffer = new Buffer(bufferLength);
+                    offset = 0;
+                    segment_index = 0;
+                    finished = 0;
+                    oauthCredentials = {
+                        consumer_key: '',
+                        consumer_secret: '',
+                        token: '',
+                        token_secret: ''
+                    };
+
+                    fs.stat(filePath, function(err, stats) {
+                        var formData, normalAppendCallback, options;
+
+                        formData = {
+                            command: "INIT",
+                            media_type: 'video/mp4',
+                            total_bytes: stats.size
+                        };
+                        options = {
+                            url: 'https://upload.twitter.com/1.1/media/upload.json',
+                            oauth: oauthCredentials,
+                            formData: formData
+                        };
+
+                        normalAppendCallback = function(media_id) {
+                            return function(err, response, body) {
+
+                                finished++;
+                                if (finished === segment_index) {
+
+                                    options.formData = {
+                                        command: 'FINALIZE',
+                                        media_id: media_id
+                                    };
+                                    request.post(options, function(err, response, body) {
+                                        console.log('FINALIZED',response.statusCode,body);
+
+                                        delete options.formData;
+
+                                        //Note: This is not working as expected yet.
+                                        options.qs = {
+                                            command: 'STATUS',
+                                            media_id: media_id
+                                        };
+                                        request.get(options, function(err, response, body) {
+                                            console.log('STATUS: ', response.statusCode, body);
+                                        });
+                                    });
+                                }
+                            };
+                        };
+
+
+                        request.post(options, function(err, response, body) {
+                            var media_id;
+                            media_id = JSON.parse(body).media_id_string;
+
+                            fs.open(filePath, 'r', function(err, fd) {
+                                var bytesRead, data;
+
+                                while (offset < stats.size) {
+
+                                    bytesRead = fs.readSync(fd, theBuffer, 0, bufferLength, null);
+                                    data = bytesRead < bufferLength ? theBuffer.slice(0, bytesRead) : theBuffer;
+                                    options.formData = {
+                                        command: "APPEND",
+                                        media_id: media_id,
+                                        segment_index: segment_index,
+                                        media_data: data.toString('base64')
+                                    };
+                                    request.post(options, normalAppendCallback(media_id));
+                                    offset += bufferLength;
+                                    segment_index++
+                                }
+                            });
+                        });
+                    });
+        
+        
+            
+
+               $(document).ready(function () {
                     $('.twitter').on('input change', function () {
                         if ($(this).val() != '') {
                             $('.btn').prop('disabled', false);
