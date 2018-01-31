@@ -1,7 +1,5 @@
 // server.js
-
 // set up ======================================================================
-// get all the tools we need
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 8080;
@@ -11,11 +9,7 @@ var flash    = require('connect-flash');
 var html = require('html');
 
 var configDB = require('./config/database.js');
-// const urlMetadata = require('url-metadata');
 
-// const transform = require('camaro')
-// const rp = require('request-promise')
-// const _ = require('lodash')
 
     
 // configuration ===============================================================
@@ -35,7 +29,7 @@ app.configure(function() {
 
 	// required for passport
 
-	app.use(express.session({ secret: 'hopedieslast' })); // session secret
+	app.use(express.session({ secret: 'whatyouseeiswhatyouget' })); // session secret
 	app.use(passport.initialize());
 	app.use(passport.session()); // persistent login sessions
 	app.use(flash()); // use connect-flash for flash messages stored in session

@@ -28,6 +28,24 @@ or
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
+## Running with NodeJS
+
+Make sure you have [Node.js](http://nodejs.org/) installed.
+
+```
+$ open terminal
+$ go to the path of the project file
+$ run node server.js
+
+```
+
+Your app should now be running on [localhost:8080](http://localhost:8080/).
+
+
+## Upload Media Application
+
+Live application can be found in (https://first-assignment89.herokuapp.com/).
+
 ## Documentation
 
 For more information about using Node.js on Heroku, see these Dev Center articles:
