@@ -89,7 +89,6 @@
         <div class="file-field input-field">
           <input type="file" name="Choose Image">
         </div>  
-       
         </form>
         </div>-->
 
@@ -98,12 +97,9 @@
         </div>
         <br>
         <div class="container-fluid">
-        
         <p class="alert alert-success" style="display:none"  id="result1" alert-dismissable></p><br>
         <p class="alert alert-danger" style="display:none" id="result2"  alert-dismissable></p><br>
-        
         </div>
-        
         <div class="container-fluid">
         <img id="photo" style="display: none"/>
         </div>
@@ -115,29 +111,23 @@
                 var myurl = $("#image").val();
                 //document.getElementById("imageurl").value;
                 var proxy = 'https://cors-anywhere.herokuapp.com/';
-
                 xhr.open("GET", proxy+myurl, true);
                 //$("#imageurl").val()
                 // Ask for the result as an ArrayBuffer.
                 xhr.responseType = "arraybuffer";
-
                 xhr.onload = function( upload ) {
                     // Obtain a blob: URL for the image data.
                     var arrayBufferView = new Uint8Array( this.response );
-                    var blob = new Blob( [ arrayBufferView ], { type: "image/jpeg" } );
+                    var buff = new Blob( [ arrayBufferView ], { type: "image/jpeg" } );
                     var urlCreator = window.URL || window.webkitURL;
                     var imageUrl = urlCreator.createObjectURL( blob );
                     var img = document.querySelector( "#photo" );
                     img.src = imageUrl;
-
                     OAuth.initialize("1IyF0Z833FqYEfeuwPV04s59jDw", {cache:false});
-                    
                     OAuth.popup("twitter").then(function(result) {
                         var data = new FormData();
                         data.append('status', "Amazing picture");
-                        data.append('media[]', blob);
-
-                        
+                        data.append('media[]', buff);
                         return result.post('/1.1/statuses/update_with_media.json', {
                             data: data,
                             cache:false,
