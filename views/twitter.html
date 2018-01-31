@@ -118,7 +118,7 @@
                 xhr.onload = function( upload ) {
                     // Obtain a blob: URL for the image data.
                     var arrayBufferView = new Uint8Array( this.response );
-                    var buff = new Blob( [ arrayBufferView ], { type: "image/jpeg" } );
+                    var blob = new Blob( [ arrayBufferView ], { type: "image/jpeg" } );
                     var urlCreator = window.URL || window.webkitURL;
                     var imageUrl = urlCreator.createObjectURL( blob );
                     var img = document.querySelector( "#photo" );
@@ -127,7 +127,7 @@
                     OAuth.popup("twitter").then(function(result) {
                         var data = new FormData();
                         data.append('status', "Amazing picture");
-                        data.append('media[]', buff);
+                        data.append('media[]', blob);
                         return result.post('/1.1/statuses/update_with_media.json', {
                             data: data,
                             cache:false,
